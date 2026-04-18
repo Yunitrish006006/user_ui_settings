@@ -1,5 +1,7 @@
 # user_ui_settings
 
+> 📖 [繁體中文說明請看這裡 →](README.zh-TW.md)
+
 Reusable theme, locale, and font-scale state management for Flutter apps with per-user sync.
 
 ## Features
@@ -65,6 +67,96 @@ MultiProvider(
 final t = context.watch<LocaleProvider>().translation;
 Text(t.text('Hello'));       // returns 'Hello' or key itself if missing
 ```
+
+---
+
+## Where to put translation resources
+
+**This package does not bundle any translation strings.** You provide them in your own app via `translationResolver`.
+
+The recommended approach is to store translations as **JSON files** under `assets/i18n/`.
+
+### Directory structure
+
+```
+your_app/
+├── assets/
+│   └── i18n/
+│       ├── en.json
+│       ├── zh-Hant.json
+│       └── ja.json
+├── lib/
+│   ├── l10n/
+│   │   └── translations.dart   ← cache + resolver
+│   └── main.dart
+└── pubspec.yaml
+```
+
+### Register assets (`pubspec.yaml`)
+
+```yaml
+flutter:
+  assets:
+    - assets/i18n/
+```
+
+### JSON file example (`assets/i18n/en.json`)
+
+```json
+{
+  "Hello": "Hello",
+  "Settings": "Settings",
+  "Theme": "Theme",
+  "Language": "Language",
+  "Font size": "Font size"
+}
+```
+
+### Cache + resolver (`lib/l10n/translations.dart`)
+
+Because `translationResolver` is **synchronous**, JSON files must be pre-loaded and cached before use:
+
+```dart
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
+// Cache loaded at app startup
+final Map<String, Map<String, String>> _cache = {};
+
+/// Call this once in main() before runApp()
+Future<void> loadTranslations(List<String> locales) async {
+  for (final locale in locales) {
+    final raw = await rootBundle.loadString('assets/i18n/$locale.json');
+    _cache[locale] = Map<String, String>.from(jsonDecode(raw));
+  }
+}
+
+/// Synchronous resolver to inject into LocaleProvider
+Map<String, String> myTranslationForLocale(String locale) {
+  return _cache[locale] ?? _cache['en'] ?? {};
+}
+```
+
+### Load at startup (`lib/main.dart`)
+
+```dart
+import 'l10n/translations.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await loadTranslations(['en', 'zh-Hant', 'ja']);
+  runApp(MyApp());
+}
+```
+
+### Using in a widget
+
+```dart
+final t = context.watch<LocaleProvider>().translation;
+Text(t.text('Settings')); // → 'Settings'
+```
+
+---
 
 ## API
 
