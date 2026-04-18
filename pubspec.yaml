@@ -1,0 +1,12 @@
+name: user_ui_settings
+description: Reusable theme, locale, and font-scale providers for Flutter apps with per-user sync.
+version: 0.1.0
+homepage: https://github.com/Yunitrish006006/taiwan_brawl_front
+repository: https://github.com/Yunitrish006006/taiwan_brawl_front
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  flutter:
+    sdk: flutter
