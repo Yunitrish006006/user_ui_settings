@@ -17,7 +17,7 @@
       "name": "flutter",
       "rootUri": "file:///Volumes/DataExtended/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.9"
+      "languageVersion": "3.10"
     },
     {
       "name": "material_color_utilities",
@@ -27,7 +27,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/yunitrish/.pub-cache/hosted/pub.dev/meta-1.17.0",
+      "rootUri": "file:///Users/yunitrish/.pub-cache/hosted/pub.dev/meta-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -35,7 +35,7 @@
       "name": "sky_engine",
       "rootUri": "file:///Volumes/DataExtended/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.9"
+      "languageVersion": "3.10"
     },
     {
       "name": "vector_math",
@@ -51,8 +51,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.11.1",
+  "generatorVersion": "3.12.0",
   "flutterRoot": "file:///Volumes/DataExtended/flutter",
-  "flutterVersion": "3.41.4",
+  "flutterVersion": "3.44.0",
   "pubCache": "file:///Users/yunitrish/.pub-cache"
 }
