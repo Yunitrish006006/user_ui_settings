@@ -18,3 +18,4 @@ library user_ui_settings;
 export 'src/locale_provider.dart';
 export 'src/theme_provider.dart';
 export 'src/ui_settings_provider.dart';
+export 'src/game_ui_settings.dart';
